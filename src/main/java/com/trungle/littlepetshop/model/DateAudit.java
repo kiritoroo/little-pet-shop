@@ -1,9 +1,9 @@
-package com.trungle.littlepetshop.models;
+package com.trungle.littlepetshop.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Column;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.MappedSuperclass;
+import javax.persistence.Column;
+import javax.persistence.EntityListeners;
+import javax.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,10 +22,10 @@ import java.time.Instant;
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(
-    value = { "createdAt", "updatedAt"},
+    value = {"createdAt", "updatedAt"},
     allowGetters = true
 )
-public class DateAudit implements Serializable {
+public abstract class DateAudit implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 

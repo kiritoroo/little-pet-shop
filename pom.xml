@@ -5,8 +5,8 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.0</version>
-        <relativePath/>
+        <version>2.7.6</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.trungle</groupId>
     <artifactId>little-pet-shop</artifactId>
@@ -98,7 +98,7 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.6.13</version>
+            <version>1.6.12</version>
         </dependency>
     </dependencies>
 
