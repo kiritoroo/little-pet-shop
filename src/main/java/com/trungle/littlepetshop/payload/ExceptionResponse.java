@@ -7,16 +7,17 @@ import org.springframework.http.HttpStatus;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.Instant;
 
 @Data
 @Builder
-public class ApiResponse implements Serializable {
+public class ExceptionResponse implements Serializable {
     @Serial
     @JsonIgnore
     private static final long serialVersionUID = 1L;
 
-    private Boolean success;
-    private String message;
-
+    private String error;
+    private String messages;
     private HttpStatus status;
+    private Instant timestamp;
 }

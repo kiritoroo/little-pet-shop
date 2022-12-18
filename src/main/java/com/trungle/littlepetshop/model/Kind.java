@@ -1,5 +1,6 @@
 package com.trungle.littlepetshop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -45,6 +46,7 @@ public class Kind extends DateAudit {
     @Column(name = "description")
     private String description;
 
+    @JsonIgnore
     @OneToMany(
         mappedBy = "kind",
         cascade = CascadeType.ALL,

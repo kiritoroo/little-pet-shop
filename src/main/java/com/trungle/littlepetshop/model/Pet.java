@@ -21,12 +21,10 @@ import lombok.Setter;
 import java.io.Serial;
 
 @Builder
-@Getter
-@Setter
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "pets")
+@Entity @Table(name = "pets")
 public class Pet extends DateAudit {
     @Serial
     private static final long serialVersionUID = 1L;

@@ -1,6 +1,6 @@
 package com.trungle.littlepetshop.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,10 +32,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity @Table(name = "pet_breeds")
-@JsonIgnoreProperties(
-    value = {"habitats", "pets"},
-    allowGetters = true
-)
 public class Breed extends DateAudit {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -75,6 +71,7 @@ public class Breed extends DateAudit {
     )
     private List<Habitat> habitats;
 
+    @JsonIgnore
     @OneToMany(
         mappedBy = "breed",
         cascade = CascadeType.ALL,
