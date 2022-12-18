@@ -17,6 +17,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 @MappedSuperclass
 @Getter @Setter
@@ -36,4 +38,20 @@ public abstract class DateAudit implements Serializable {
     @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
+
+    public String getCreatedAtString() {
+        DateTimeFormatter formatter = DateTimeFormatter
+            .ofPattern("dd/MM/yyyy")
+            .withZone(ZoneId.systemDefault());
+
+        return formatter.format(this.createdAt);
+    }
+
+    public String getUpdatedAtString() {
+        DateTimeFormatter formatter = DateTimeFormatter
+            .ofPattern("dd/MM/yyyy")
+            .withZone(ZoneId.systemDefault());
+
+        return formatter.format(this.updatedAt);
+    }
 }
