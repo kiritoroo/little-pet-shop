@@ -33,7 +33,7 @@ public class KindWebController {
     @GetMapping("/create")
     public ModelAndView createKind() {
         ModelAndView modelAndView = new ModelAndView("/admin/kind/form");
-        modelAndView.addObject("kind", new Kind());
+        modelAndView.addObject("kind", new KindRequest());
         modelAndView.addObject("action", "create");
 
         return modelAndView;

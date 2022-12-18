@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,6 +27,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity @Table(name = "pet_kinds")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Kind extends DateAudit {
     @Serial
     private static final long serialVersionUID = 1L;

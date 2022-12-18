@@ -25,3 +25,14 @@ INSERT IGNORE INTO `little_pet_shop`.`pet_kinds` (`title`, `description`, `creat
 VALUES ('Dog', 'Dog pet...', NOW(), NOW());
 INSERT IGNORE INTO `little_pet_shop`.`pet_kinds` (`title`, `description`, `created_at`, `updated_at`)
 VALUES ('Rabit', 'Dog pet...', NOW(), NOW());
+
+INSERT IGNORE INTO `little_pet_shop`.`pet_breeds` (`id_kind`, `title`, `description`, `origin`, `created_at`, `updated_at`)
+VALUES ('1', 'Peruvian Guinea Pig', 'The smooth, straight fur can grow as long as 2 feet!', 'Peru', NOW(), NOW());
+INSERT IGNORE INTO `little_pet_shop`.`pet_breeds` (`id_kind`, `title`, `description`, `origin`, `created_at`, `updated_at`)
+VALUES ('1', 'Skinny Guinea Pig', 'The Skinny is part of the hairless guinea pigs', 'Canada', NOW(), NOW());
+INSERT IGNORE INTO `little_pet_shop`.`pet_breeds` (`id_kind`, `title`, `description`, `origin`, `created_at`, `updated_at`)
+VALUES ('1', 'Teddy Guinea Pig', 'Nicknamed after the famous stuffed animal, the Teddy is an easier breed to keep up with', 'United States', NOW(), NOW());
+INSERT IGNORE INTO `little_pet_shop`.`pet_breeds` (`id_kind`, `title`, `description`, `origin`, `created_at`, `updated_at`)
+VALUES ('1', 'Texel Guinea Pig', 'Texels are a rare cross breed between a Silkie and a Rex', 'England', NOW(), NOW());
+INSERT IGNORE INTO `little_pet_shop`.`pet_breeds` (`id_kind`, `title`, `description`, `origin`, `created_at`, `updated_at`)
+VALUES ('1', 'Coronet Guinea Pig', 'A Coronet can be identified by its flowing, voluminous mane that doesn''t have a part', 'Himalaya', NOW(), NOW());

@@ -40,21 +40,15 @@ public class Breed extends DateAudit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Pet breed title not blank")
-    @Size(max = 200)
     @Column(name = "title", nullable = false, unique = true)
     private String title;
 
-    @Size(max = 200)
     @Column(name = "description")
     private String description;
 
-    @NotBlank(message = "Breed origin not blank")
-    @Size(max = 200)
     @Column(name = "origin", nullable = false)
     private String origin;
 
-    @NotNull(message = "Breed kind not null")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_kind", nullable = false)
     private Kind kind;

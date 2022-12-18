@@ -1,9 +1,9 @@
 package com.trungle.littlepetshop.controller.api;
 
-import com.trungle.littlepetshop.model.Kind;
+import com.trungle.littlepetshop.model.Breed;
 import com.trungle.littlepetshop.payload.ApiResponse;
-import com.trungle.littlepetshop.payload.KindRequest;
-import com.trungle.littlepetshop.service.KindService;
+import com.trungle.littlepetshop.payload.BreedRequest;
+import com.trungle.littlepetshop.service.BreedService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,16 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Tag(name = "Pet Kind CRUD Operation")
+@Tag(name = "Pet breed CRUD Operation")
 @RestController
-@RequestMapping("/api/kinds")
-public class KindApiController {
+@RequestMapping("/api/breeds")
+public class BreedApiController {
     @Autowired
-    private KindService kindService;
+    private BreedService breedService;
 
     @GetMapping
-    public ResponseEntity<List<Kind>> getKindsList() {
-        List<Kind> data = kindService.getKindsList();
+    public ResponseEntity<List<Breed>> getBreedsList() {
+        List<Breed> data = breedService.getBreedsList();
 
         return ResponseEntity
             .status(HttpStatus.OK)
@@ -36,10 +36,10 @@ public class KindApiController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Kind> getKind(
+    public ResponseEntity<Breed> getBreed(
         @PathVariable(name = "id") Long id
     ) {
-        Kind data = kindService.getKind(id);
+        Breed data = breedService.getBreed(id);
 
         return ResponseEntity
             .status(HttpStatus.OK)
@@ -47,10 +47,10 @@ public class KindApiController {
     }
 
     @PostMapping
-    public ResponseEntity<Kind> createKind(
-        @RequestBody KindRequest body
+    public ResponseEntity<Breed> createBreed(
+        @RequestBody BreedRequest body
     ) {
-        Kind data = kindService.createKind(body);
+        Breed data = breedService.createBreed(body);
 
         return ResponseEntity
             .status(HttpStatus.CREATED)
@@ -58,11 +58,11 @@ public class KindApiController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Kind> updateKind(
+    public ResponseEntity<Breed> updateBreed(
         @PathVariable(name = "id") Long id,
-        @RequestBody KindRequest body
+        @RequestBody BreedRequest body
     ) {
-        Kind data = kindService.upateKind(id, body);
+        Breed data = breedService.updateBreed(id, body);
 
         return ResponseEntity
             .status(HttpStatus.OK)
@@ -70,10 +70,10 @@ public class KindApiController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> deleteKind(
+    public ResponseEntity<ApiResponse> deleteBreed(
         @PathVariable(name = "id") Long id
     ) {
-        ApiResponse data = kindService.deleteKind(id);
+        ApiResponse data = breedService.deleteBreed(id);
 
         return ResponseEntity
             .status(HttpStatus.OK)
