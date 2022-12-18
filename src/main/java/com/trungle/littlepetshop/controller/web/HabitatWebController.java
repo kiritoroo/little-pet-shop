@@ -34,6 +34,7 @@ public class HabitatWebController {
     public ModelAndView createHabitat() {
         ModelAndView modelAndView = new ModelAndView("/admin/habitat/form");
         modelAndView.addObject("habitat", new HabitatRequest());
+        modelAndView.addObject("action", "create");
 
         return modelAndView;
     }
@@ -54,6 +55,7 @@ public class HabitatWebController {
         ModelAndView modelAndView = new ModelAndView("/admin/habitat/form");
         Habitat habitat = habitatService.getHabitat(id);
         modelAndView.addObject("habitat", habitat);
+        modelAndView.addObject("action", "edit");
 
         return modelAndView;
     }
