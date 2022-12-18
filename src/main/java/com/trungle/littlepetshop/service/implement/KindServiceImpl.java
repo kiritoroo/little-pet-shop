@@ -1,7 +1,9 @@
 package com.trungle.littlepetshop.service.implement;
 
+import com.trungle.littlepetshop.exception.ResourceNotFoundException;
 import com.trungle.littlepetshop.model.Kind;
 import com.trungle.littlepetshop.payload.ApiResponse;
+import com.trungle.littlepetshop.payload.KindRequest;
 import com.trungle.littlepetshop.repository.KindRepository;
 import com.trungle.littlepetshop.service.KindService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,26 +18,51 @@ public class KindServiceImpl implements KindService {
 
     @Override
     public List<Kind> getKindsList() {
-        return null;
+        return kindRepository.findAll();
     }
 
     @Override
     public Kind getKind(Long id) {
-        return null;
+        return kindRepository
+            .findById(id)
+            .orElseThrow(() ->
+                ResourceNotFoundException.builder()
+                    .resourceName("Kind")
+                    .fieldName("ID")
+                    .fieldValue(id)
+                    .build()
+            );
     }
 
     @Override
-    public Kind createKind(Kind kind) {
-        return null;
+    public Kind createKind(KindRequest kindRequest) {
+        Kind newKind = Kind.builder()
+            .title(kindRequest.getTitle())
+            .description(kindRequest.getDescription())
+            .build();
+
+        return kindRepository.save(newKind);
     }
 
     @Override
-    public Kind upateKind(Kind kind, Long id) {
-        return null;
+    public Kind upateKind(Long id, KindRequest kindRequest) {
+        Kind updatedKind = this.getKind(id);
+
+        updatedKind.setTitle(kindRequest.getTitle());
+        updatedKind.setDescription(kindRequest.getDescription());
+
+        return kindRepository.save(updatedKind);
     }
 
     @Override
     public ApiResponse deleteKind(Long id) {
-        return null;
+        Kind deletedKind = this.getKind(id);
+
+        kindRepository.delete(deletedKind);
+
+        return ApiResponse.builder()
+            .success(Boolean.TRUE)
+            .message("Pet kind deleted success")
+            .build();
     }
 }

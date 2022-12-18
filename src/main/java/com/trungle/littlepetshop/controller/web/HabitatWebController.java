@@ -49,7 +49,7 @@ public class HabitatWebController {
     }
 
     @GetMapping("/edit/{id}")
-    public ModelAndView getHabitat(
+    public ModelAndView editHabitat(
         @PathVariable(name = "id") Long id
     ) {
         ModelAndView modelAndView = new ModelAndView("/admin/habitat/form");

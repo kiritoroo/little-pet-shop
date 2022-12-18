@@ -14,3 +14,14 @@ INSERT IGNORE INTO `little_pet_shop`.`habitats` (`title`, `description`, `create
 VALUES ('Ocean', 'Ocean habitat', NOW(), NOW());
 INSERT IGNORE INTO `little_pet_shop`.`habitats` (`title`, `description`, `created_at`, `updated_at`)
 VALUES ('Coral Reef', 'Coral Reef habitat...', NOW(), NOW());
+
+INSERT IGNORE INTO `little_pet_shop`.`pet_kinds` (`title`, `description`, `created_at`, `updated_at`)
+VALUES ('Guinea Pig', 'Guinea Pig pet...', NOW(), NOW());
+INSERT IGNORE INTO `little_pet_shop`.`pet_kinds` (`title`, `description`, `created_at`, `updated_at`)
+VALUES ('Hamster', 'Hamster pet...', NOW(), NOW());
+INSERT IGNORE INTO `little_pet_shop`.`pet_kinds` (`title`, `description`, `created_at`, `updated_at`)
+VALUES ('Cat', 'Cat pet...', NOW(), NOW());
+INSERT IGNORE INTO `little_pet_shop`.`pet_kinds` (`title`, `description`, `created_at`, `updated_at`)
+VALUES ('Dog', 'Dog pet...', NOW(), NOW());
+INSERT IGNORE INTO `little_pet_shop`.`pet_kinds` (`title`, `description`, `created_at`, `updated_at`)
+VALUES ('Rabit', 'Dog pet...', NOW(), NOW());
