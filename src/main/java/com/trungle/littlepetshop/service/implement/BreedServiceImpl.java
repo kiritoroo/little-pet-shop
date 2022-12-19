@@ -41,7 +41,7 @@ public class BreedServiceImpl implements BreedService {
     public Breed createBreed(BreedRequest breedRequest) {
         Breed newBreed = Breed.builder()
             .title(breedRequest.getTitle())
-            .description(breedRequest.getDesciption())
+            .description(breedRequest.getDescription())
             .origin(breedRequest.getOrigin())
             .kind(breedRequest.getKind())
             .habitats(breedRequest.getHabitats())

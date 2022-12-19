@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{layout/head :: head}">
+    <title>Little Pet Shop | Habitats</title>
+</head>
+<body class="bg-blue-50">
+<!--  Container -->
+<div class="w-screen h-screen px-8 py-10">
+    <div class="w-full h-full rounded-2xl drop-shadow-xl overflow-hidden bg-gray-50">
+        <div class="h-full w-full grid grid-cols-10 gap-2 flex-nowrap">
+            <!-- Sidebar -->
+            <div th:replace="layout/sidebar :: sidebar"></div>
+            <div class="col col-span-8 overflow-y-auto mx-8 my-12 px-8 py-4 rounded-lg text-gray-800 bg-white h-100 drop-shadow-md">
+                <!-- Title -->
+                <div class="container max-w-7xl mx-auto mt-8">
+                    <div class="mb-4">
+                        <h1 class="flex items-center text-3xl font-semibold dark:text-white">Breed Management</h1>
+                    </div>
+                </div>
+                <hr class="my-4 h-px bg-gray-200 border-0 dark:bg-gray-700">
+                <!-- S Content -->
+                <div class="flex flex-col">
+                    <div class="overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+                        <!-- Create Button -->
+                        <div class="flex flex-row justify-items-center justify-between my-4">
+                            <a href="#" th:href="@{/breeds/create}" class="flex justify-end">
+                                <button type="button" class="flex items-center text-blue-500 px-5 py-2.5 text-center mr-2 mb-2 bg-gradient-to-br from-blue-100 to-blue-200 hover:bg-gradient-to-bl focus:text-blue-300 hover:text-blue-400 focus:ring-2 focus:outline-none focus:ring-blue-100 font-medium rounded-lg text-sm whitespace-no-wrap">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                    <span class="px-2">Add new</span>
+                                </button>
+                            </a>
+                        </div>
+                        <!-- S Table -->
+                        <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
+                            <table class="min-w-full">
+                                <thead>
+                                <tr>
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-800 uppercase border-b border-blue-200 bg-blue-100">
+                                        ID
+                                    </th>
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-800 uppercase border-b border-blue-200 bg-blue-100">
+                                        Title
+                                    </th>
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-800 uppercase border-b border-blue-200 bg-blue-100">
+                                        Origin
+                                    </th>
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-800 uppercase border-b border-blue-200 bg-blue-100">
+                                        Description
+                                    </th>
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-800 uppercase border-b border-blue-200 bg-blue-100">
+                                        Last updated
+                                    </th>
+                                    <th class="px-6 py-3 text-sm text-left text-gray-500 border-b border-blue-200 bg-blue-100" colspan="3">
+                                        Action
+                                    </th>
+                                </tr>
+                                </thead>
+
+                                <tbody class="bg-white">
+                                <tr th:each="breed: ${breeds}">
+                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-blue-100">
+                                            <span class="bg-green-50 text-green-500 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
+                                                <span th:text="${breed.getId()}"></span>
+                                            </span>
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-blue-100">
+                                        <div th:text="${breed.getTitle()}"></div>
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-blue-100">
+                                        <div th:text="${breed.getOrigin()}"></div>
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-blue-100">
+                                        <p th:text="${breed.getDescription()}" class="text-sm leading-5 text-gray-900"></p>
+                                    </td>
+
+                                    <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-blue-100">
+                                        <span class="bg-blue-100 text-blue-500 text-xs font-medium inline-flex items-center px-2.5 py-1.5 rounded">
+                                            <svg aria-hidden="true" class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+                                            <span th:text="${breed.getUpdatedAtString()}"></span>
+                                        </span>
+                                    </td>
+
+                                    <td class="text-sm font-medium leading-5 text-center whitespace-no-wrap border-b border-blue-100">
+                                        <a href="#" th:href="@{/breeds/edit/{id}(id = ${breed.getId()})}" class="text-blue-300 hover:text-blue-400">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                            </svg>
+                                        </a>
+                                    </td>
+                                    <td class="text-sm font-medium leading-5 whitespace-no-wrap border-b border-blue-100 ">
+                                        <a href="#" th:href="@{/breeds/delete/{id}(id = ${breed.getId()})}" class="text-blue-300 hover:text-blue-400">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- E Table -->
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

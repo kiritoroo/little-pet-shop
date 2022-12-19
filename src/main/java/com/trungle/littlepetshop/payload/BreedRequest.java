@@ -16,7 +16,7 @@ public class BreedRequest {
     private String title;
 
     @Size(max = 200)
-    private String desciption;
+    private String description;
 
     @NotBlank(message = "Breed origin not blank")
     @Size(max = 200)
