@@ -4,6 +4,7 @@ import com.trungle.littlepetshop.model.Breed;
 import com.trungle.littlepetshop.model.Habitat;
 import com.trungle.littlepetshop.model.Kind;
 import com.trungle.littlepetshop.payload.BreedRequest;
+import com.trungle.littlepetshop.payload.HabitatRequest;
 import com.trungle.littlepetshop.service.BreedService;
 import com.trungle.littlepetshop.service.HabitatService;
 import com.trungle.littlepetshop.service.KindService;
@@ -33,7 +34,7 @@ public class BreedWebController {
     private HabitatService habitatService;
 
     @GetMapping
-    public ModelAndView getBreedsView() {
+    public ModelAndView getBreedsList() {
         ModelAndView modelAndView = new ModelAndView("/admin/breed/list");
         List<Breed> breeds = breedService.getBreedsList();
         modelAndView.addObject("breeds", breeds);
@@ -79,6 +80,16 @@ public class BreedWebController {
         modelAndView.addObject("action", "edit");
 
         return modelAndView;
+    }
+
+    @PostMapping("/update/{id}")
+    public RedirectView updateHabitat(
+        @PathVariable(name = "id") Long id,
+        @ModelAttribute BreedRequest body
+    ) {
+        breedService.updateBreed(id, body);
+
+        return new RedirectView("/breeds");
     }
 
     @GetMapping("/delete/{id}")

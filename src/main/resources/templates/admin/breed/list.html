@@ -41,6 +41,9 @@
                                         ID
                                     </th>
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-800 uppercase border-b border-blue-200 bg-blue-100">
+                                        Kind
+                                    </th>
+                                    <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-800 uppercase border-b border-blue-200 bg-blue-100">
                                         Title
                                     </th>
                                     <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-800 uppercase border-b border-blue-200 bg-blue-100">
@@ -64,6 +67,10 @@
                                             <span class="bg-green-50 text-green-500 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
                                                 <span th:text="${breed.getId()}"></span>
                                             </span>
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-blue-100">
+                                        <div th:text="${breed.getKind().getTitle()}"></div>
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-no-wrap border-b border-blue-100">

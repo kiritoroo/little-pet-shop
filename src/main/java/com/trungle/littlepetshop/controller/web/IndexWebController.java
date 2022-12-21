@@ -8,6 +8,6 @@ import org.springframework.web.servlet.view.RedirectView;
 public class IndexWebController {
     @GetMapping("/")
     public RedirectView indexView() {
-        return new RedirectView("/breeds");
+        return new RedirectView("/pets");
     }
 }

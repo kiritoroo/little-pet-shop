@@ -2,9 +2,13 @@ package com.trungle.littlepetshop.service.implement;
 
 import com.trungle.littlepetshop.exception.ResourceNotFoundException;
 import com.trungle.littlepetshop.model.Breed;
+import com.trungle.littlepetshop.model.Habitat;
+import com.trungle.littlepetshop.model.Kind;
 import com.trungle.littlepetshop.payload.ApiResponse;
 import com.trungle.littlepetshop.payload.BreedRequest;
 import com.trungle.littlepetshop.repository.BreedRepository;
+import com.trungle.littlepetshop.repository.HabitatRepository;
+import com.trungle.littlepetshop.repository.KindRepository;
 import com.trungle.littlepetshop.repository.PetRepository;
 import com.trungle.littlepetshop.service.BreedService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +20,12 @@ import java.util.List;
 public class BreedServiceImpl implements BreedService {
     @Autowired
     private BreedRepository breedRepository;
+
     @Autowired
-    private PetRepository petRepository;
+    private KindRepository kindRepository;
+
+    @Autowired
+    private HabitatRepository habitatRepository;
 
     @Override
     public List<Breed> getBreedsList() {
@@ -39,12 +47,25 @@ public class BreedServiceImpl implements BreedService {
 
     @Override
     public Breed createBreed(BreedRequest breedRequest) {
+        Kind kind = kindRepository
+            .findById(breedRequest.getKind())
+            .orElseThrow(() ->
+                ResourceNotFoundException.builder()
+                    .resourceName("Kind")
+                    .fieldName("ID")
+                    .fieldValue(breedRequest.getKind())
+                    .build()
+            );
+
+        List<Habitat> habitats = habitatRepository
+            .findAllById(breedRequest.getHabitats());
+
         Breed newBreed = Breed.builder()
             .title(breedRequest.getTitle())
             .description(breedRequest.getDescription())
             .origin(breedRequest.getOrigin())
-            .kind(breedRequest.getKind())
-            .habitats(breedRequest.getHabitats())
+            .kind(kind)
+            .habitats(habitats)
             .build();
 
         return breedRepository.save(newBreed);
@@ -54,11 +75,24 @@ public class BreedServiceImpl implements BreedService {
     public Breed updateBreed(Long id, BreedRequest breedRequest) {
         Breed updatedBreed = this.getBreed(id);
 
-        updatedBreed.setTitle(updatedBreed.getTitle());
-        updatedBreed.setDescription(updatedBreed.getDescription());
-        updatedBreed.setOrigin(updatedBreed.getOrigin());
-        updatedBreed.setKind(updatedBreed.getKind());
-        updatedBreed.setHabitats(updatedBreed.getHabitats());
+        Kind kind = kindRepository
+            .findById(breedRequest.getKind())
+            .orElseThrow(() ->
+                ResourceNotFoundException.builder()
+                    .resourceName("Kind")
+                    .fieldName("ID")
+                    .fieldValue(breedRequest.getHabitats())
+                    .build()
+            );
+
+        List<Habitat> habitats = habitatRepository
+            .findAllById(breedRequest.getHabitats());
+
+        updatedBreed.setTitle(breedRequest.getTitle());
+        updatedBreed.setDescription(breedRequest.getDescription());
+        updatedBreed.setOrigin(breedRequest.getOrigin());
+        updatedBreed.setKind(kind);
+        updatedBreed.setHabitats(habitats);
 
         return breedRepository.save(updatedBreed);
     }

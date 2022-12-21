@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{layout/head :: head}">
+    <title>Little Pet Shop | Habitats</title>
+</head>
+<body class="bg-blue-50">
+<!--  Container -->
+<div class="w-screen h-screen px-8 py-10">
+    <div class="w-full h-full rounded-2xl drop-shadow-xl overflow-hidden bg-gray-50">
+        <div class="h-full w-full grid grid-cols-10 gap-2 flex-nowrap">
+            <!-- Sidebar -->
+            <div th:replace="layout/sidebar :: sidebar"></div>
+            <div class="col col-span-8 overflow-y-auto mx-8 my-12 px-8 py-4 rounded-lg text-gray-800 bg-white h-100 drop-shadow-md">
+                <!-- Title -->
+                <div class="container max-w-7xl mx-auto mt-8">
+                    <div class="mb-4">
+                        <h1 class="flex items-center text-3xl font-semibold dark:text-white">Kind Management</h1>
+                    </div>
+                </div>
+                <hr class="my-4 h-px bg-gray-200 border-0 dark:bg-gray-700">
+                <!-- S Content -->
+                <div class="flex flex-col">
+                    <div class="overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+                        <!-- Create Button -->
+                        <div class="flex flex-row justify-items-center justify-between my-4">
+                            <a href="#" th:href="@{/pets/create}" class="flex justify-end">
+                                <button type="button" class="flex items-center text-blue-500 px-5 py-2.5 text-center mr-2 mb-2 bg-gradient-to-br from-blue-100 to-blue-200 hover:bg-gradient-to-bl focus:text-blue-300 hover:text-blue-400 focus:ring-2 focus:outline-none focus:ring-blue-100 font-medium rounded-lg text-sm whitespace-no-wrap">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                    <span class="px-2">Add new</span>
+                                </button>
+                            </a>
+                        </div>
+                        <!-- S Card -->
+                        <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+                            <div class="rounded-lg overflow-hidden shadow-lg" th:each="pet: ${pets}">
+                                <img class="w-full" th:src="${pet.getPicture().getUrl()}" alt="Mountain">
+                                <div class="px-6 py-4">
+                                    <div class="font-bold text-xl mb-2" th:text="${pet.getName()}"></div>
+                                </div>
+
+                                <div class="px-6 pt-4 pb-2">
+                                    <span class="inline-block bg-green-50 rounded-full px-3 py-1 text-sm font-semibold text-green-500 mr-2 mb-2"  th:each="habitat: ${pet.getBreed().getHabitats()}">
+                                        <span th:text="${habitat.getTitle()}"></span>
+                                    </span>
+                                </div>
+
+                                <div class="px-6 mb-2">
+                                    <span class="font-semibold text-md">Kind: <span class="font-normal text-lg" th:text="${pet.getBreed().getKind().getTitle()}"></span></span>
+                                </div>
+                                <div class="px-6 mb-2">
+                                    <span class="font-semibold text-md">Breed: <span class="font-normal text-lg" th:text="${pet.getBreed().getTitle()}"></span></span>
+                                </div>
+                                <div class="px-6 mb-2 flex flex-row justify-between items-center">
+                                    <span class="font-semibold text-md">Age: <span class="font-normal text-lg" th:text="${pet.getAge()}"></span></span>
+                                    <span class="font-semibold text-md">Gender: <span class="font-normal text-lg" th:text="${pet.getGender()}"></span></span>
+                                    <span class="font-semibold text-md">Color: <span class="font-normal text-lg" th:text="${pet.getColor()}"></span></span>
+                                </div>
+
+                                <div class="px-6 mb-2 flex flex-row justify-center items-center gap-4 mt-5">
+                                    <a href="#" th:href="@{/pets/edit/{id}(id = ${pet.getId()})}" class="flex items-center text-blue-500 px-5 py-2.5 text-center mr-2 mb-2 bg-gradient-to-br from-blue-50 to-blue-100 hover:bg-gradient-to-bl focus:text-blue-300 hover:text-blue-400 focus:ring-2 focus:outline-none focus:ring-blue-100 font-medium rounded-lg text-sm whitespace-no-wrap">
+                                        <span class="px-2">Edit</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" th:href="@{/pets/delete/{id}(id = ${pet.getId()})}" class="flex items-center text-blue-500 px-5 py-2.5 text-center mr-2 mb-2 bg-gradient-to-br from-blue-50 to-blue-100 hover:bg-gradient-to-bl focus:text-blue-300 hover:text-blue-400 focus:ring-2 focus:outline-none focus:ring-blue-100 font-medium rounded-lg text-sm whitespace-no-wrap">
+                                        <span class="px-2">Delete</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- E Card -->
+                    </div>
+                </div>
+                <!-- E Content -->
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

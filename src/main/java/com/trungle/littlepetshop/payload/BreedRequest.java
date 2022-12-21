@@ -23,7 +23,7 @@ public class BreedRequest {
     private String origin;
 
     @NotNull(message = "Breed kind not null")
-    private Kind kind;
+    private Long kind;
 
-    private List<Habitat> habitats;
+    private List<Long> habitats;
 }

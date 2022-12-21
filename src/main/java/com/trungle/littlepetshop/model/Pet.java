@@ -1,5 +1,6 @@
 package com.trungle.littlepetshop.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -36,13 +39,14 @@ public class Pet extends DateAudit {
     @NotBlank(message = "Pet name not blank")
     @Size(max = 200)
     @Column(name = "name", nullable = false, unique = true)
-    private String titlname;
+    private String name;
 
     @Size(max = 200)
     @Column(name = "description")
     private String description;
 
-    @Column(name = "age")
+    @NotNull(message = "Pet age not null")
+    @Column(name = "age", nullable = false)
     private int age;
 
     @NotBlank(message = "Pet gender not blank")
@@ -53,11 +57,17 @@ public class Pet extends DateAudit {
     @Column(name = "color", nullable = false)
     private String color;
 
-    @Column(name = "picture")
-    private String picture;
-
     @NotNull(message = "Pet breed not null")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_breed", nullable = false)
     private Breed breed;
+
+    @OneToOne(
+        mappedBy = "pet",
+        cascade = CascadeType.ALL,
+        fetch = FetchType.EAGER,
+        orphanRemoval = true
+    )
+    @PrimaryKeyJoinColumn
+    private Picture picture;
 }
