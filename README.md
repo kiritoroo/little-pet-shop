@@ -11,7 +11,7 @@
 </p>
 
 # About
-Project for Cloud Computing
+Project for Web
 
 <img src="https://raw.githubusercontent.com/kiritoroo/little-pet-shop/master/capture/capture.png" width="1000"></img>
 
